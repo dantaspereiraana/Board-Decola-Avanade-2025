@@ -24,17 +24,18 @@ public class MigrationStrategy {
         var originalOut = System.out;
         var originalErr = System.err;
 
-        try (var fos = new FileOutputStream("liquibase.log")) {
+        try (var fos = new FileOutputStream("liquibase.log");
+             var printStream = new PrintStream(fos)){
             System.setOut(new PrintStream(fos));
             System.setErr(new PrintStream(fos));
 
-            try (var connection = getConnection();
-                 var jdbcConnection = new JdbcConnection(connection);
+            try (var jdbcConnection = new JdbcConnection(connection);
             ) {
                 var liquibase = new Liquibase("/db/changelg/db.changelog-master.yml",
                         new ClassLoaderResourceAccessor(),
                         jdbcConnection);
-            } catch (SQLException | LiquibaseException e) {
+                liquibase.update("");
+            } catch (LiquibaseException e) {
                 e.printStackTrace();
             }
             System.setErr(originalErr);

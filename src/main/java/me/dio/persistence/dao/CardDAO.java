@@ -2,6 +2,7 @@ package me.dio.persistence.dao;
 
 import com.mysql.cj.jdbc.StatementImpl;
 import lombok.AllArgsConstructor;
+import me.dio.persistence.dto.CardDetailsDTO;
 import me.dio.persistence.entity.CardEntity;
 
 import java.sql.Connection;
@@ -30,6 +31,16 @@ public class CardDAO {
         return entity;
     }
 
+    public void moveToColumn(final Long columnId, final Long cardId) throws SQLException{
+        var sql = "UPDATE CARDS SET board_column_id = ? WHERE id = ?;";
+        try(var statement = connection.prepareStatement(sql)){
+            var i = 1;
+            statement.setLong(i ++, columnId);
+            statement.setLong(i, cardId);
+            statement.executeUpdate();
+        }
+    }
+
     public Optional<CardDetailsDTO> findById(final Long id) throws SQLException{
         var sql = """
                 SELECT c.id,
@@ -56,7 +67,7 @@ public class CardDAO {
             var resultSet = statement.getResultSet();
             if(resultSet.next()){
                 var dto = new CardDetailsDTO(
-                        resultSet.getLong("id"),
+                        resultSet.getLong("c.id"),
                         resultSet.getString("c.title"),
                         resultSet.getString("c.description"),
                         nonNull(resultSet.getString("b.block_reason")),

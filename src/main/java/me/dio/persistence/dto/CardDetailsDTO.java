@@ -1,4 +1,4 @@
-package me.dio.persistence.dao;
+package me.dio.persistence.dto;
 
 import java.time.OffsetDateTime;
 

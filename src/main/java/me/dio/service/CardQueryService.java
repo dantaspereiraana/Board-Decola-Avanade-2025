@@ -2,7 +2,7 @@ package me.dio.service;
 
 import lombok.AllArgsConstructor;
 import me.dio.persistence.dao.CardDAO;
-import me.dio.persistence.dao.CardDetailsDTO;
+import me.dio.persistence.dto.CardDetailsDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;

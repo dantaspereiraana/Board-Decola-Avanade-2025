@@ -1,0 +1,31 @@
+mar. 16, 2025 4:46:30 PM liquibase.command
+INFORMAÇÕES: Logging exception.
+ERROR: Exception Details
+ERROR: Exception Primary Class:  ChangeLogParseException
+ERROR: Exception Primary Reason:  /db/changelg/db.changelog-master.yml does not exist
+ERROR: Exception Primary Source:  4.29.2
+mar. 16, 2025 4:46:30 PM liquibase.command
+INFORMAÇÕES: Command execution complete
+liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: /db/changelg/db.changelog-master.yml does not exist
+	at liquibase.command.CommandScope.execute(CommandScope.java:258)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:216)
+	at liquibase.Scope.lambda$child$0(Scope.java:191)
+	at liquibase.Scope.child(Scope.java:200)
+	at liquibase.Scope.child(Scope.java:190)
+	at liquibase.Scope.child(Scope.java:169)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1329)
+	at liquibase.Liquibase.update(Liquibase.java:205)
+	at liquibase.Liquibase.update(Liquibase.java:188)
+	at liquibase.Liquibase.update(Liquibase.java:175)
+	at liquibase.Liquibase.update(Liquibase.java:165)
+	at me.dio.persistence.migration.MigrationStrategy.executeMigration(MigrationStrategy.java:37)
+	at me.dio.Application.main(Application.java:19)
+Caused by: liquibase.exception.ChangeLogParseException: /db/changelg/db.changelog-master.yml does not exist
+	at liquibase.parser.core.yaml.YamlChangeLogParser.parse(YamlChangeLogParser.java:37)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
+	at liquibase.Scope.child(Scope.java:200)
+	at liquibase.Scope.child(Scope.java:176)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
+	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
+	at liquibase.command.CommandScope.execute(CommandScope.java:220)
+	... 12 more
